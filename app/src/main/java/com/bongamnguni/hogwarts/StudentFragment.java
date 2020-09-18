@@ -1,11 +1,15 @@
 package com.bongamnguni.hogwarts;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -15,9 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.bongamnguni.hogwarts.Adapter.HouseAdapter;
 import com.bongamnguni.hogwarts.Adapter.StudentAdapter;
-import com.bongamnguni.hogwarts.Model.House;
 import com.bongamnguni.hogwarts.Model.Student;
 import com.bongamnguni.hogwarts.Utility.Config;
 import com.google.gson.Gson;
@@ -29,31 +31,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentActivity extends AppCompatActivity {
 
+public class StudentFragment extends Fragment {
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     StudentAdapter studentViewAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
-        recyclerView = findViewById(R.id.listStudents);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        linearlayout = new LinearLayoutManager(getApplicationContext());
+        View view = inflater.inflate(R.layout.fragment_student, container, false);
+
+        recyclerView = view.findViewById(R.id.listStudents);
+
+        linearlayout = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearlayout);
 
-
-        getData();
+        getAllStudent();
+        return view;
     }
 
-
-    private void getData() {
+    private void getAllStudent() {
         final List<Student> arrList = new ArrayList<>();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(StudentActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
                 Config.BASE_URL+"characters/?key="+Config.API_KEY, null,
@@ -78,10 +80,10 @@ public class StudentActivity extends AppCompatActivity {
 
 
                             } catch (JSONException e) {
-                                Toast.makeText(StudentActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             }
                         }
-                        studentViewAdapter = new StudentAdapter(getApplicationContext(),arrList);
+                        studentViewAdapter = new StudentAdapter(getActivity(),arrList);
                         recyclerView.setAdapter(studentViewAdapter);
 
                     }
@@ -90,7 +92,7 @@ public class StudentActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest error", error.toString());
-                        Toast.makeText(StudentActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         );
@@ -103,6 +105,4 @@ public class StudentActivity extends AppCompatActivity {
 
         requestQueue.add(jsonArrayRequest);
     }
-
-
 }

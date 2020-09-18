@@ -14,6 +14,7 @@ public class Config {
     public static  String TAG_HOUSE_GHOST = "houseGhost";
     public static  String TAG_FOUNDER = "founder";
     public static  String TAG_COLORS = "colors";
+    public static  String TAG_MEMBERS = "members";
     public static  String TAG_MASCOT = "mascot";
 
     public static String BASE_URL = "https://www.potterapi.com/v1/";

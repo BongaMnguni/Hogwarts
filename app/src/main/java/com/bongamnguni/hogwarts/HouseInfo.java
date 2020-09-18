@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.bongamnguni.hogwarts.Adapter.HouseAdapter;
 import com.bongamnguni.hogwarts.Model.ColorsModel;
 import com.bongamnguni.hogwarts.Model.House;
+import com.bongamnguni.hogwarts.Model.MembersModel;
 import com.bongamnguni.hogwarts.Utility.Config;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,8 +43,8 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     HouseAdapter houseViewAdapter;
-    private ArrayList<String> arrayList;
-    private ListView listViewColors;
+    private ArrayList<String> arrayList,arrayListMembers;
+    private ListView listViewColors,listViewMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,13 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         listViewColors = findViewById(R.id.listview);
+        listViewMembers = findViewById(R.id.Memberslistview);
+
+        listViewMembers.setVisibility(View.GONE);
 
         Config.TAG_HOUSE_NAME= bundle.getString(Config.TAG_HOUSE_NAME);
         toolBarLayout.setTitle(Config.TAG_HOUSE_NAME);
@@ -64,7 +71,18 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
         Config.TAG_FOUNDER= bundle.getString(Config.TAG_FOUNDER);
 
         arrayList = new ArrayList<>();
+        arrayListMembers = new ArrayList<>();
+
         ArrayList<ColorsModel> arrayListColors = this.getIntent().getParcelableArrayListExtra(Config.TAG_COLORS);
+        ArrayList<MembersModel> arrayListMember = this.getIntent().getParcelableArrayListExtra(Config.TAG_MEMBERS);
+
+
+        for (int i =0; i <arrayListMember.size(); i++ ){
+            arrayListMembers.add(arrayListMember.get(i).getMember());
+        }
+
+        ArrayAdapter<String> membersAdapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayListMembers);
+        listViewMembers.setAdapter(membersAdapter);
 
         for (int i =0; i <arrayListColors.size(); i++ ){
             arrayList.add(arrayListColors.get(i).getColor());
@@ -72,8 +90,6 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
         listViewColors.setAdapter(adapter);
-
-
 
         tvMascot = findViewById(R.id.tvmascot);
         tvHeadOfhouse = findViewById(R.id.tvheadOfhouse);
@@ -85,14 +101,11 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
         tvHouseGhost.setText(Config.TAG_HOUSE_GHOST);
         tvFounder.setText(Config.TAG_FOUNDER);
 
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                listViewMembers.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -117,9 +130,6 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
                                 House gobalPojo = gson.fromJson(jsonObject.toString(), House.class);
 
                                     arrList.add(gobalPojo);
-
-
-
 
                             } catch (JSONException e) {
                                 Toast.makeText(HouseInfo.this, e.toString(), Toast.LENGTH_LONG).show();

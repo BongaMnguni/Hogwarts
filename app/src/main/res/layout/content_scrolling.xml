@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".HouseInfo"
     tools:showIn="@layout/activity_house_info">
@@ -127,6 +128,14 @@
         android:id="@+id/listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+        <ListView
+            android:visibility="gone"
+            android:paddingTop="15dp"
+            android:layout_below="@+id/listview"
+            android:id="@+id/Memberslistview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

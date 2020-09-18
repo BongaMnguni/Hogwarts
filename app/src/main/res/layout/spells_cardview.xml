@@ -19,19 +19,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/layout_spells"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_alignParentStart="true"
-            android:src="@drawable/icon_student"
-            android:adjustViewBounds="true"
-            android:id="@+id/gallery_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/more"
+                android:id="@+id/img_more"
+                android:layout_width="25dp"
+                android:layout_height="50dp"/>
 
         <TextView
             android:textStyle="bold"
@@ -42,18 +43,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        </LinearLayout>
-        <ImageView
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/layout_spells"
-            android:id="@+id/img_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
 
         <LinearLayout
-            android:layout_below="@+id/img_more"
+            android:id="@+id/layout_spells_type"
+            android:visibility="gone"
+            android:layout_below="@+id/layout_spells"
             android:weightSum="2"
             android:orientation="horizontal"
             android:layout_width="match_parent"

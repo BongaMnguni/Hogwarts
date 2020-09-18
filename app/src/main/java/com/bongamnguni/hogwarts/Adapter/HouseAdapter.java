@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bongamnguni.hogwarts.HouseInfo;
 import com.bongamnguni.hogwarts.Model.ColorsModel;
 import com.bongamnguni.hogwarts.Model.House;
+import com.bongamnguni.hogwarts.Model.MembersModel;
 import com.bongamnguni.hogwarts.R;
 import com.bongamnguni.hogwarts.Utility.Config;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHolder>{
     public List<House> list ;
     public ArrayList<ColorsModel> listColorsModel = new ArrayList<>() ;
+    public ArrayList<MembersModel> listMembersModel = new ArrayList<>() ;
     private Context context;
 
 
@@ -58,6 +60,11 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
                     listColorsModel.add(colorsModel);
                 }
 
+                for(int i = 0; i <list.get(position).getValues().size(); i++){
+                    MembersModel membersModel = new MembersModel();
+                    membersModel.setMember(list.get(position).getValues().get(i));
+                    listMembersModel.add(membersModel);
+                }
 
 
                 Intent i = new Intent(context, HouseInfo.class);
@@ -67,6 +74,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
                 i.putExtra(Config.TAG_HOUSE_GHOST,list.get(position).getHouseGhost());
                 i.putExtra(Config.TAG_FOUNDER,list.get(position).getFounder());
                 i.putExtra(Config.TAG_COLORS, listColorsModel);
+                i.putExtra(Config.TAG_MEMBERS, listMembersModel);
                 context.startActivity(i);
 
 

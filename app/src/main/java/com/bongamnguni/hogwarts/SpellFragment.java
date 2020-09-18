@@ -1,11 +1,14 @@
 package com.bongamnguni.hogwarts;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -27,29 +30,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpellsInfo extends AppCompatActivity {
-    LinearLayoutManager linearlayout;
-    RecyclerView recyclerView;
-    SpellsAdapter spellsAdapter;
+public class SpellFragment extends Fragment {
+    private LinearLayoutManager linearlayout;
+    private RecyclerView recyclerView;
+    private SpellsAdapter spellsAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_spells_info);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        recyclerView = findViewById(R.id.listSpells);
+        View view = inflater.inflate(R.layout.fragment_spell, container, false);
 
-        linearlayout = new LinearLayoutManager(getApplicationContext());
+        recyclerView = view.findViewById(R.id.listSpells);
+        linearlayout = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearlayout);
+
+        getAllSpell();
+        return view;
     }
-    private void getData() {
+
+    private void getAllSpell() {
         final List<Spells> arrList = new ArrayList<>();
 
-        RequestQueue requestQueue = Volley.newRequestQueue(SpellsInfo.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
-                Config.BASE_URL+"spells/?key="+Config.API_KEY, null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Config.BASE_URL + "spells/?key=" + Config.API_KEY, null,
 
                 new Response.Listener<JSONArray>() {
 
@@ -65,14 +70,14 @@ public class SpellsInfo extends AppCompatActivity {
 
                                 Spells gobalPojo = gson.fromJson(jsonObject.toString(), Spells.class);
 
-                                    arrList.add(gobalPojo);
+                                arrList.add(gobalPojo);
 
 
                             } catch (JSONException e) {
-                                Toast.makeText(SpellsInfo.this, e.toString(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             }
                         }
-                        spellsAdapter = new SpellsAdapter(getApplicationContext(),arrList);
+                        spellsAdapter = new SpellsAdapter(getActivity(), arrList);
                         recyclerView.setAdapter(spellsAdapter);
 
                     }
@@ -81,7 +86,7 @@ public class SpellsInfo extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest error", error.toString());
-                        Toast.makeText(SpellsInfo.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
         );
@@ -94,5 +99,4 @@ public class SpellsInfo extends AppCompatActivity {
 
         requestQueue.add(jsonArrayRequest);
     }
-
 }
