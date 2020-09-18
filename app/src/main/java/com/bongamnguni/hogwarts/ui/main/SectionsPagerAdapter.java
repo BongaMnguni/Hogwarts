@@ -1,6 +1,7 @@
 package com.bongamnguni.hogwarts.ui.main;
 
 import android.content.Context;
+import android.widget.TableLayout;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -20,6 +21,7 @@ import com.bongamnguni.hogwarts.StudentFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private Fragment fragment;
+
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};

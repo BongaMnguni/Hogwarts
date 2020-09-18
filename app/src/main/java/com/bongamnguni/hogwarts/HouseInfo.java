@@ -43,12 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HouseInfo extends AppCompatActivity {
-TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
+    TextView tvMascot, tvFounder, tvHeadOfhouse, tvHouseGhost;
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     HouseAdapter houseViewAdapter;
-    private ArrayList<String> arrayList,arrayListMembers;
-    private ListView listViewColors,listViewMembers;
+    private ArrayList<String> arrayList, arrayListMembers;
+    private ListView listViewColors, listViewMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +67,12 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
 
         listViewMembers.setVisibility(View.GONE);
 
-        Config.TAG_HOUSE_NAME= bundle.getString(Config.TAG_HOUSE_NAME);
+        Config.TAG_HOUSE_NAME = bundle.getString(Config.TAG_HOUSE_NAME);
         toolBarLayout.setTitle(Config.TAG_HOUSE_NAME);
-        Config.TAG_MASCOT= bundle.getString(Config.TAG_MASCOT);
-        Config.TAG_HEAD_OF_HOUSE= bundle.getString(Config.TAG_HEAD_OF_HOUSE);
-        Config.TAG_HOUSE_GHOST= bundle.getString(Config.TAG_HOUSE_GHOST);
-        Config.TAG_FOUNDER= bundle.getString(Config.TAG_FOUNDER);
+        Config.TAG_MASCOT = bundle.getString(Config.TAG_MASCOT);
+        Config.TAG_HEAD_OF_HOUSE = bundle.getString(Config.TAG_HEAD_OF_HOUSE);
+        Config.TAG_HOUSE_GHOST = bundle.getString(Config.TAG_HOUSE_GHOST);
+        Config.TAG_FOUNDER = bundle.getString(Config.TAG_FOUNDER);
 
         arrayList = new ArrayList<>();
         arrayListMembers = new ArrayList<>();
@@ -81,23 +81,23 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
         ArrayList<MembersModel> arrayListMember = this.getIntent().getParcelableArrayListExtra(Config.TAG_MEMBERS);
 
 
-        for (int i =0; i <arrayListMember.size(); i++ ){
+        for (int i = 0; i < arrayListMember.size(); i++) {
             arrayListMembers.add(arrayListMember.get(i).getMember());
         }
 
         LayoutInflater inflater = getLayoutInflater();
-        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.layout_member_header, listViewMembers, false);
+        ViewGroup header = (ViewGroup) inflater.inflate(R.layout.layout_member_header, listViewMembers, false);
         listViewMembers.addHeaderView(header, null, false);
 
         ArrayAdapter<String> membersAdapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayListMembers);
         listViewMembers.setAdapter(membersAdapter);
 
-        for (int i =0; i <arrayListColors.size(); i++ ){
+        for (int i = 0; i < arrayListColors.size(); i++) {
             arrayList.add(arrayListColors.get(i).getColor());
         }
 
         LayoutInflater colorsInflater = getLayoutInflater();
-        ViewGroup colorsHeader = (ViewGroup)colorsInflater.inflate(R.layout.layout_color_header, listViewColors, false);
+        ViewGroup colorsHeader = (ViewGroup) colorsInflater.inflate(R.layout.layout_color_header, listViewColors, false);
         listViewColors.addHeaderView(colorsHeader, null, false);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
@@ -118,60 +118,11 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
             @Override
             public void onClick(View view) {
                 listViewMembers.setVisibility(View.VISIBLE);
-                Animation upAnim = AnimationUtils.loadAnimation(HouseInfo.this,R.anim.translate);
+                Animation upAnim = AnimationUtils.loadAnimation(HouseInfo.this, R.anim.translate);
                 upAnim.reset();
                 listViewMembers.clearAnimation();
                 listViewMembers.setAnimation(upAnim);
             }
         });
     }
-
-    private void getData() {
-        final List<House> arrList = new ArrayList<>();
-        RequestQueue requestQueue = Volley.newRequestQueue(HouseInfo.this);
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "https://www.potterapi.com/v1/houses/?key=$2a$10$1JEnmtEF417yBaFZcr51qukRjaKv8d5toEG5DKP/IUZWIVwfsaF7y", null,
-                new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                        for (int i = 0; i < response.length(); i++) {
-
-                            try {
-
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                Gson gson = new Gson();
-
-                                House gobalPojo = gson.fromJson(jsonObject.toString(), House.class);
-
-                                    arrList.add(gobalPojo);
-
-                            } catch (JSONException e) {
-                                Toast.makeText(HouseInfo.this, e.toString(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                        houseViewAdapter = new HouseAdapter(getApplicationContext(),arrList);
-                        recyclerView.setAdapter(houseViewAdapter);
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest error", error.toString());
-                        Toast.makeText(HouseInfo.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-
-        jsonArrayRequest.setRetryPolicy(new DefaultRetryPolicy(
-                50000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
-        );
-
-        requestQueue.add(jsonArrayRequest);
-    }
-
 }

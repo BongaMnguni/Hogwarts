@@ -59,14 +59,6 @@ public class StudentInfo extends AppCompatActivity {
         tvDeathEater.setText(Config.TAG_DEATH_EATER);
         tvBloodStatus.setText(Config.TAG_BLOOD_STATUS);
         tvSpecies.setText(Config.TAG_SPECIES);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        
     }
 }

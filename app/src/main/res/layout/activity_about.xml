@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colobackground"
     tools:context=".AboutActivity">
 
     <ScrollView
@@ -32,7 +33,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        android:scaleType="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/a" />
 
                 </RelativeLayout>
@@ -46,7 +47,7 @@
                         android:layout_height="290dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        android:scaleType="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/b" />
 
                 </RelativeLayout>
@@ -60,7 +61,7 @@
                         android:layout_height="290dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        android:scaleType="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/c" />
                 </RelativeLayout>
 
@@ -73,7 +74,7 @@
                         android:layout_height="290dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        android:scaleType="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/d" />
                 </RelativeLayout>
 
@@ -86,7 +87,7 @@
                         android:layout_height="290dp"
                         android:layout_gravity="center"
                         android:adjustViewBounds="true"
-                        android:scaleType="center"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/e" />
                 </RelativeLayout>
 
@@ -94,6 +95,7 @@
             </ViewFlipper>
 
             <TextView
+                android:textColor="@color/colorAccent"
                 android:id="@+id/heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,6 +108,7 @@
                 android:typeface="serif" />
 
             <TextView
+
                 android:id="@+id/contentInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
