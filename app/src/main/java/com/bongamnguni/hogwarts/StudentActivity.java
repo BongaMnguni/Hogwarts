@@ -19,6 +19,7 @@ import com.bongamnguni.hogwarts.Adapter.HouseAdapter;
 import com.bongamnguni.hogwarts.Adapter.StudentAdapter;
 import com.bongamnguni.hogwarts.Model.House;
 import com.bongamnguni.hogwarts.Model.Student;
+import com.bongamnguni.hogwarts.Utility.Config;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -54,7 +55,9 @@ public class StudentActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(StudentActivity.this);
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "https://www.potterapi.com/v1/characters/?key=$2a$10$1JEnmtEF417yBaFZcr51qukRjaKv8d5toEG5DKP/IUZWIVwfsaF7y", null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                Config.BASE_URL+"characters/?key="+Config.API_KEY, null,
+
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -72,8 +75,6 @@ public class StudentActivity extends AppCompatActivity {
                                 if (gobalPojo.getRole() != null && gobalPojo.getRole().equalsIgnoreCase("student")){
                                     arrList.add(gobalPojo);
                                 }
-                                //arrList.add(gobalPojo);
-
 
 
                             } catch (JSONException e) {

@@ -53,28 +53,56 @@
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mascot"/>
+                    android:text="House"/>
                 <TextView
                     android:textStyle="bold"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HeadOfHouse"/>
+                    android:text="School"/>
                 <TextView
                     android:textStyle="bold"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="HouseGhost"/>
+                    android:text="Ministry Of Magic"/>
                 <TextView
                     android:textStyle="bold"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Founder"/>
+                    android:text="Order Of Pheonix"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dumbledores"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Death Eater"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Blood Status"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Species"/>
 
             </LinearLayout>
 
@@ -87,28 +115,56 @@
                 <TextView
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:id="@+id/tvmascot"
+                    android:id="@+id/tvs_house"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin" />
                 <TextView
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:id="@+id/tvheadOfhouse"
+                    android:id="@+id/tvs_school"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin" />
                 <TextView
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:id="@+id/tvhouseGhost"
+                    android:id="@+id/tvs_ministry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin" />
                 <TextView
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:id="@+id/tvfounder"
+                    android:id="@+id/tvs_pheonix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvs_dumbledoresarmy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvs_deatheater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvs_bloodstatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvs_species"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/text_margin" />

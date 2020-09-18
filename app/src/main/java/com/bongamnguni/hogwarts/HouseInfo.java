@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.bongamnguni.hogwarts.Adapter.HouseAdapter;
+import com.bongamnguni.hogwarts.Model.ColorsModel;
 import com.bongamnguni.hogwarts.Model.House;
 import com.bongamnguni.hogwarts.Utility.Config;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -24,6 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +42,8 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     HouseAdapter houseViewAdapter;
+    private ArrayList<String> arrayList;
+    private ListView listViewColors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +54,26 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
         setSupportActionBar(toolbar);
         CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
 
+        listViewColors = findViewById(R.id.listview);
+
         Config.TAG_HOUSE_NAME= bundle.getString(Config.TAG_HOUSE_NAME);
         toolBarLayout.setTitle(Config.TAG_HOUSE_NAME);
         Config.TAG_MASCOT= bundle.getString(Config.TAG_MASCOT);
         Config.TAG_HEAD_OF_HOUSE= bundle.getString(Config.TAG_HEAD_OF_HOUSE);
         Config.TAG_HOUSE_GHOST= bundle.getString(Config.TAG_HOUSE_GHOST);
         Config.TAG_FOUNDER= bundle.getString(Config.TAG_FOUNDER);
+
+        arrayList = new ArrayList<>();
+        ArrayList<ColorsModel> arrayListColors = this.getIntent().getParcelableArrayListExtra(Config.TAG_COLORS);
+
+        for (int i =0; i <arrayListColors.size(); i++ ){
+            arrayList.add(arrayListColors.get(i).getColor());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
+        listViewColors.setAdapter(adapter);
+
+
 
         tvMascot = findViewById(R.id.tvmascot);
         tvHeadOfhouse = findViewById(R.id.tvheadOfhouse);

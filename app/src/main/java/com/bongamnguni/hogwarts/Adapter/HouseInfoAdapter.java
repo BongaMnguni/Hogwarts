@@ -1,9 +1,6 @@
 package com.bongamnguni.hogwarts.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +10,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bongamnguni.hogwarts.HouseInfo;
-import com.bongamnguni.hogwarts.Model.ColorsModel;
 import com.bongamnguni.hogwarts.Model.House;
 import com.bongamnguni.hogwarts.R;
-import com.bongamnguni.hogwarts.Utility.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHolder>{
+public class HouseInfoAdapter extends RecyclerView.Adapter<HouseInfoAdapter.HouseviewHolder>{
     public List<House> list ;
-    public ArrayList<ColorsModel> listColorsModel = new ArrayList<>() ;
     private Context context;
 
 
-    public HouseAdapter(Context context, List<House> list) {
+    public HouseInfoAdapter(Context context, List<House> list) {
         this.list = list;
         this.context = context;
 
@@ -51,25 +43,7 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
         holder.tvHouseName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                for(int i =0; i< list.get(position).getColors().size();i++ ){
-                    ColorsModel colorsModel = new ColorsModel();
-                    colorsModel.setColor(list.get(position).getColors().get(i));
-                    listColorsModel.add(colorsModel);
-                }
-
-
-
-                Intent i = new Intent(context, HouseInfo.class);
-                i.putExtra(Config.TAG_HOUSE_NAME,list.get(position).getName());
-                i.putExtra(Config.TAG_MASCOT,list.get(position).getMascot());
-                i.putExtra(Config.TAG_HEAD_OF_HOUSE,list.get(position).getHeadOfHouse());
-                i.putExtra(Config.TAG_HOUSE_GHOST,list.get(position).getHouseGhost());
-                i.putExtra(Config.TAG_FOUNDER,list.get(position).getFounder());
-                i.putExtra(Config.TAG_COLORS, listColorsModel);
-                context.startActivity(i);
-
-
+                Toast.makeText(context,"hello",Toast.LENGTH_LONG).show();
             }
         });
 
