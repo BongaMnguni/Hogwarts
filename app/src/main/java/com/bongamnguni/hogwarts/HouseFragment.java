@@ -1,5 +1,6 @@
 package com.bongamnguni.hogwarts;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,12 +37,14 @@ public class HouseFragment extends Fragment {
     private LinearLayoutManager linearlayout;
     private RecyclerView recyclerView;
     private HouseAdapter houseViewAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_house, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
         recyclerView = view.findViewById(R.id.listHouses);
 
         linearlayout = new LinearLayoutManager(getActivity());
@@ -52,12 +55,17 @@ public class HouseFragment extends Fragment {
         return view;
     }
 
+
     private void getAllHouses() {
+
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
         final List<House> arrList = new ArrayList<>();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Config.BASE_URL+"houses/?key="+Config.API_KEY, null,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Config.BASE_URL + "houses/?key=" + Config.API_KEY, null,
                 new Response.Listener<JSONArray>() {
 
                     @Override
@@ -66,10 +74,8 @@ public class HouseFragment extends Fragment {
                         for (int i = 0; i < response.length(); i++) {
 
                             try {
-
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 Gson gson = new Gson();
-
                                 House gobalPojo = gson.fromJson(jsonObject.toString(), House.class);
 
                                 arrList.add(gobalPojo);
@@ -78,9 +84,10 @@ public class HouseFragment extends Fragment {
                                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             }
                         }
-                        houseViewAdapter = new HouseAdapter(getActivity(),arrList);
+                        houseViewAdapter = new HouseAdapter(getActivity(), arrList);
                         recyclerView.setAdapter(houseViewAdapter);
 
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -88,6 +95,7 @@ public class HouseFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest error", error.toString());
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
         );

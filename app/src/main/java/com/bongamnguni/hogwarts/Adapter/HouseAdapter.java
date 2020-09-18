@@ -2,13 +2,12 @@ package com.bongamnguni.hogwarts.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -77,10 +76,14 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
                 i.putExtra(Config.TAG_MEMBERS, listMembersModel);
                 context.startActivity(i);
 
-
             }
         });
 
+
+        Animation upAnim = AnimationUtils.loadAnimation(context,R.anim.translate);
+        upAnim.reset();
+        holder.itemView.clearAnimation();
+        holder.itemView.setAnimation(upAnim);
 
     }
     @Override
@@ -95,10 +98,6 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
             public HouseviewHolder(@NonNull View itemView) {
                 super(itemView);
                 tvHouseName = itemView.findViewById(R.id.tvhouse_name);
-
             }
         }
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.bongamnguni.hogwarts;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -36,12 +37,14 @@ public class StudentFragment extends Fragment {
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     StudentAdapter studentViewAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_student, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
         recyclerView = view.findViewById(R.id.listStudents);
 
         linearlayout = new LinearLayoutManager(getActivity());
@@ -53,6 +56,10 @@ public class StudentFragment extends Fragment {
     }
 
     private void getAllStudent() {
+
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
         final List<Student> arrList = new ArrayList<>();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
@@ -78,9 +85,11 @@ public class StudentFragment extends Fragment {
                                     arrList.add(gobalPojo);
                                 }
 
+                                progressDialog.dismiss();
 
                             } catch (JSONException e) {
                                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
+                                progressDialog.dismiss();
                             }
                         }
                         studentViewAdapter = new StudentAdapter(getActivity(),arrList);
@@ -93,6 +102,7 @@ public class StudentFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest error", error.toString());
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
         );

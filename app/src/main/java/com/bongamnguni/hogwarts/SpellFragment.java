@@ -1,6 +1,8 @@
 package com.bongamnguni.hogwarts;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,12 +36,14 @@ public class SpellFragment extends Fragment {
     private LinearLayoutManager linearlayout;
     private RecyclerView recyclerView;
     private SpellsAdapter spellsAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_spell, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
         recyclerView = view.findViewById(R.id.listSpells);
         linearlayout = new LinearLayoutManager(getActivity());
         recyclerView.setHasFixedSize(true);
@@ -50,6 +54,10 @@ public class SpellFragment extends Fragment {
     }
 
     private void getAllSpell() {
+
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+
         final List<Spells> arrList = new ArrayList<>();
 
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
@@ -64,22 +72,20 @@ public class SpellFragment extends Fragment {
                         for (int i = 0; i < response.length(); i++) {
 
                             try {
-
                                 JSONObject jsonObject = response.getJSONObject(i);
                                 Gson gson = new Gson();
 
                                 Spells gobalPojo = gson.fromJson(jsonObject.toString(), Spells.class);
-
                                 arrList.add(gobalPojo);
-
 
                             } catch (JSONException e) {
                                 Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_LONG).show();
                             }
                         }
+
                         spellsAdapter = new SpellsAdapter(getActivity(), arrList);
                         recyclerView.setAdapter(spellsAdapter);
-
+                        progressDialog.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
@@ -87,6 +93,7 @@ public class SpellFragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Rest error", error.toString());
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
                 }
         );

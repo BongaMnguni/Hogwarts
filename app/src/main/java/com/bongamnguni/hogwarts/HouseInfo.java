@@ -25,7 +25,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -81,12 +85,20 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
             arrayListMembers.add(arrayListMember.get(i).getMember());
         }
 
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.layout_member_header, listViewMembers, false);
+        listViewMembers.addHeaderView(header, null, false);
+
         ArrayAdapter<String> membersAdapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayListMembers);
         listViewMembers.setAdapter(membersAdapter);
 
         for (int i =0; i <arrayListColors.size(); i++ ){
             arrayList.add(arrayListColors.get(i).getColor());
         }
+
+        LayoutInflater colorsInflater = getLayoutInflater();
+        ViewGroup colorsHeader = (ViewGroup)colorsInflater.inflate(R.layout.layout_color_header, listViewColors, false);
+        listViewColors.addHeaderView(colorsHeader, null, false);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplication(), android.R.layout.simple_list_item_1, android.R.id.text1, arrayList);
         listViewColors.setAdapter(adapter);
@@ -106,6 +118,10 @@ TextView tvMascot,tvFounder,tvHeadOfhouse,tvHouseGhost;
             @Override
             public void onClick(View view) {
                 listViewMembers.setVisibility(View.VISIBLE);
+                Animation upAnim = AnimationUtils.loadAnimation(HouseInfo.this,R.anim.translate);
+                upAnim.reset();
+                listViewMembers.clearAnimation();
+                listViewMembers.setAnimation(upAnim);
             }
         });
     }
