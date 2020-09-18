@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".HouseInfo"
+    tools:showIn="@layout/activity_house_info">
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/tools"
+        card_view:cardElevation="3dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPaddingLeft="3dp"
+        card_view:contentPaddingTop="3dp"
+        card_view:contentPaddingBottom="3dp"
+        card_view:contentPaddingRight="3dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:theme="@style/AlertDialog.AppCompat"
+        app:ignore="NamespaceTypo">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mascot"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HeadOfHouse"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HouseGhost"/>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_margin="@dimen/text_margin"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Founder"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvmascot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvheadOfhouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvhouseGhost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+                <TextView
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1"
+                    android:id="@+id/tvfounder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_margin" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.core.widget.NestedScrollView>

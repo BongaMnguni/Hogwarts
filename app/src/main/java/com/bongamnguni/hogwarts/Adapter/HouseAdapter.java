@@ -1,15 +1,21 @@
 package com.bongamnguni.hogwarts.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bongamnguni.hogwarts.HouseInfo;
 import com.bongamnguni.hogwarts.Model.House;
 import com.bongamnguni.hogwarts.R;
+import com.bongamnguni.hogwarts.Utility.Config;
 
 import java.util.List;
 
@@ -41,7 +47,16 @@ public class HouseAdapter extends RecyclerView.Adapter<HouseAdapter.HouseviewHol
         holder.tvHouseName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.tvHouseName.setSingleLine(false);
+                Intent i = new Intent(context, HouseInfo.class);
+                i.putExtra(Config.TAG_HOUSE_NAME,list.get(position).getName());
+                i.putExtra(Config.TAG_MASCOT,list.get(position).getMascot());
+                i.putExtra(Config.TAG_HEAD_OF_HOUSE,list.get(position).getHeadOfHouse());
+                i.putExtra(Config.TAG_HOUSE_GHOST,list.get(position).getHouseGhost());
+                i.putExtra(Config.TAG_FOUNDER,list.get(position).getFounder());
+                //i.putExtra(Config.TAG_COLORS,list.get(position).getColors());
+                context.startActivity(i);
+
+
             }
         });
 

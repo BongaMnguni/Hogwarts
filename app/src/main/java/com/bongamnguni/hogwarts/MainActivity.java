@@ -31,9 +31,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String JSON_STRING;
-    String name;
-
     LinearLayoutManager linearlayout;
     RecyclerView recyclerView;
     HouseAdapter houseViewAdapter;
@@ -56,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getData() {
         final List<House> arrList = new ArrayList<>();
+
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "https://www.potterapi.com/v1/houses/?key=$2a$10$1JEnmtEF417yBaFZcr51qukRjaKv8d5toEG5DKP/IUZWIVwfsaF7y", null,
@@ -73,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 House gobalPojo = gson.fromJson(jsonObject.toString(), House.class);
 
-                                arrList.add(gobalPojo);
-
+                                    arrList.add(gobalPojo);
 
                             } catch (JSONException e) {
                                 Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_LONG).show();
